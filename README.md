@@ -10,6 +10,9 @@
 
 ### Examples
 ```python
+>>> import torch
+>>> from embedding import numEmbedding
+
 >>> # generate data with nan values
 >>> shape = (3, 3)
 >>> m = torch.empty(*shape).uniform_(0, 1)
