@@ -10,26 +10,34 @@
 
 ### Examples
 ```python
->>> import torch
->>> from embedding import numEmbedding
+import torch
+from embedding import numEmbedding
 
->>> # generate data with nan values
->>> shape = (3, 3)
->>> m = torch.empty(*shape).uniform_(0, 1)
->>> m = torch.bernoulli(m)
->>> i = torch.where(m > 0.5)
+# generate data with nan values
+shape = (3, 3)
+m = torch.empty(*shape).uniform_(0, 1)
+m = torch.bernoulli(m)
+i = torch.where(m > 0.5)
 
->>> x = torch.randn(*shape).to("cuda")
->>> x[i] = torch.nan
->>> x
+x = torch.randn(*shape).to("cuda")
+x[i] = torch.nan
+x
+```
+
+```markdown
 tensor([[-0.1382,     nan, -0.1591],
         [    nan, -0.1746, -1.5460],
         [    nan,  1.4191,     nan]], device='cuda:0')
+```
 
->>> # embedding with numEmbedding moudle
->>> embedding_dim = 4
->>> embed = numEmbedding(embedding_dim).to("cuda")
->>> embed(x)
+```python
+# embedding with numEmbedding moudle
+embedding_dim = 4
+embed = numEmbedding(embedding_dim).to("cuda")
+embed(x)
+```
+
+```markdown
 tensor([[[ 0.4167,  0.0142,  0.4243],
          [ 0.1930,  0.7074,  0.2082],
          [-0.1636,  1.7226, -0.1762],
@@ -47,6 +55,7 @@ tensor([[[ 0.4167,  0.0142,  0.4243],
 ```
 
 In this example, the `nan` value is replaced by
-```python
+
+```markdown
 tensor([ 0.0142,  0.7074,  1.7226, -0.5870], device='cuda:0', requires_grad=True)
 ```
